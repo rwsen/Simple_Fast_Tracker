@@ -63,7 +63,7 @@ class RandomWordsState extends State<RandomWords>
   
   Widget _buildRow(WordPair pair)
   {
-    // check for duplicates
+    // check for saved status
     final bool alreadySaved = _saved.contains(pair);
     return ListTile
     (
@@ -77,6 +77,22 @@ class RandomWordsState extends State<RandomWords>
         alreadySaved ? Icons.favorite : Icons.favorite_border,
         color: alreadySaved ? Colors.red : null,
       ),
+      onTap: ()
+      // change state and rebuild UI
+      {
+        setState
+        (
+          ()
+          {
+            if (alreadySaved)
+            {
+              _saved.remove(pair);
+            } else {
+              _saved.add(pair);
+            }
+          }
+        );
+      },
     );
   }
 }
