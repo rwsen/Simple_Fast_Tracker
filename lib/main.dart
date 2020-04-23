@@ -13,6 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Simple Fast Tracker',
       home: RandomWords(),
+      theme: ThemeData
+      (
+        primaryColor: Colors.green,
+      )
     );
   }
 }
