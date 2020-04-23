@@ -32,8 +32,38 @@ class RandomWordsState extends State<RandomWords>
   {
     return Scaffold
     (
-      appBar: AppBar(title: Text('Simple Fast Tracker'),),
+      appBar: AppBar
+      (
+        title: Text('Simple Fast Tracker'),
+        actions: <Widget>[IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),],
+      ),
       body: _buildSuggestions(),
+    );
+  }
+  
+  // push a new route that displays the list of saved wordpairs
+  void _pushSaved()
+  {
+    Navigator.of(context).push
+    (
+      MaterialPageRoute<void>
+      (
+        builder: (BuildContext)
+        {
+          final Iterable<ListTile> tiles = _saved.map(
+            (WordPair pair)
+            {
+              return ListTile( title: Text(pair.asPascalCase, style: _biggerFont));
+            }
+          );
+          final List<Widget> divided = ListTile.divideTiles(context: context, tiles: tiles).toList();
+          return Scaffold
+          (
+            appBar: AppBar(title: Text('Saved WordPairs')), 
+            body: ListView(children: divided)
+          );
+        },
+      ),
     );
   }
 
